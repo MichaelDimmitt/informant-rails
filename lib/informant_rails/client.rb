@@ -6,6 +6,10 @@ module InformantRails
       new_request.request_url = env['HTTP_REFERER']
     end
 
+    def self.inform(model)
+      request.process_model(model) if request && model
+    end
+
     def self.request
       @requests[Thread.current.object_id]
     end
