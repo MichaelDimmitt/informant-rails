@@ -18,17 +18,21 @@ module InformantRails
     end
 
     def self.request
-      @requests[Thread.current.object_id]
+      @requests[request_id]
     end
 
     private
 
     def self.new_request
-      @requests[Thread.current.object_id] = Request.new
+      @requests[request_id] = Request.new
     end
 
     def self.remove_request
-      @requests.delete(Thread.current.object_id)
+      @requests.delete(request_id)
+    end
+
+    def self.request_id
+      Thread.current.object_id
     end
 
     def self.api_url
