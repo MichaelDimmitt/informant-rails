@@ -24,4 +24,19 @@ describe InformantRails::Request do
       end
     end
   end
+
+  describe '#to_json' do
+    subject { request.to_json }
+    let(:model) { User.new(name: 'a') }
+    before do
+      request.request_url = 'example.com/somewhere'
+      request.process_model(model)
+    end
+    it do
+      should == {
+        models: [InformantRails::Model.new(model)],
+        request_url: 'example.com/somewhere'
+      }.to_json
+    end
+  end
 end

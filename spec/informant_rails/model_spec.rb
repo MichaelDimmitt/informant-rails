@@ -24,4 +24,17 @@ describe InformantRails::Model do
       expect(name_error.message).to eq("is too short (minimum is 2 characters)")
     end
   end
+
+  describe '#to_json' do
+    subject { model.to_json }
+    it do
+      should == {
+        name: 'User',
+        errors: [
+          { name: 'email', value: nil, message: "can't be blank" },
+          { name: 'name', value: 'a', message: "is too short (minimum is 2 characters)" }
+        ]
+      }.to_json
+    end
+  end
 end
