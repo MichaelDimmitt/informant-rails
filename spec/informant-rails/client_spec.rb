@@ -37,23 +37,40 @@ describe InformantRails::Client do
 
   describe '.process' do
     let(:request) { described_class.request }
+    let(:model) { User.new.tap(&:save) }
     before { described_class.record({}) }
 
-    context 'with an api token present' do
+    context 'with an api token' do
       before { InformantRails::Config.api_token = 'abc123' }
 
-      it 'sends the data to the informant' do
-        Typhoeus.should_receive(:post).with(
-          described_class.send(:api_url),
-          body: request.to_json
-        )
-        described_class.process
+      context 'and errors present' do
+        before { described_class.inform(model) }
+
+        it 'sends the data to the informant' do
+          Typhoeus.should_receive(:post).with(
+            described_class.send(:api_url),
+            body: request.to_json
+          )
+          described_class.process
+        end
+
+        it 'removes the request transaction from the cache' do
+          Typhoeus.stub(:post)
+          described_class.process
+          expect(described_class.request).to be_nil
+        end
       end
 
-      it 'removes the request transaction from the cache' do
-        Typhoeus.stub(:post)
-        described_class.process
-        expect(described_class.request).to be_nil
+      context 'without an api token present' do
+        it 'sends the data to the informant' do
+          Typhoeus.should_not_receive(:post)
+          described_class.process
+        end
+
+        it 'removes the request transaction from the cache' do
+          described_class.process
+          expect(described_class.request).to be_nil
+        end
       end
     end
 

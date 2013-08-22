@@ -20,7 +20,7 @@ module InformantRails
     def self.process
       Typhoeus.post(
         api_url, body: request.to_json
-      ) if Config.api_token.present?
+      ) if Config.api_token.present? && request.models.any?
       remove_request
     end
 
