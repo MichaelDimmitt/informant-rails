@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    informant_rails (0.0.1)
+    informant-rails (0.0.1)
       rails
       typhoeus
 
@@ -107,7 +107,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  informant_rails!
+  informant-rails!
   pry
   rake
   rspec

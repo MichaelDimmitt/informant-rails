@@ -2,10 +2,10 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'informant_rails/version'
+require 'informant-rails/version'
 
 Gem::Specification.new do |s|
-  s.name = "informant_rails"
+  s.name = "informant-rails"
   s.version = InformantRails::VERSION
   s.license = "GPL"
 
