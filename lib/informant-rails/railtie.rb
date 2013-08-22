@@ -18,7 +18,7 @@ module InformantRails
       class ::ActiveRecord::Base
         def valid?(*args)
           result = super(*args)
-          InformantRails::Client.inform(self) if errors.any?
+          InformantRails::Client.inform(self)
           result
         end
       end

@@ -11,8 +11,8 @@ shared_examples 'save action' do
 
   context 'with a valid model' do
     let(:model) { User.new(name: 'Han Solo', email: 'han@starwars.com') }
-    it 'does not get called' do
-      InformantRails::Client.should_not receive(:inform)
+    it 'gets called' do
+      InformantRails::Client.should receive(:inform).with(model)
       model.public_send(save_action)
     end
   end
