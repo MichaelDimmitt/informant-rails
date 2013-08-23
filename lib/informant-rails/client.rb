@@ -1,3 +1,5 @@
+require 'net/http'
+
 module InformantRails
   class Client
     @requests = {}
@@ -18,9 +20,9 @@ module InformantRails
     end
 
     def self.process
-      Typhoeus.post(
-        api_url, body: request.to_json
-      ) if Config.api_token.present? && request.models.any?
+      if Config.api_token.present? && request && request.models.any?
+        Net::HTTP.post_form(api_url, request.as_json)
+      end
       remove_request
     end
 

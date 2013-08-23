@@ -1,7 +1,6 @@
 require 'bundler'
 
 require 'rails/all'
-require 'typhoeus'
 
 Bundler.require(:default, :gemspec)
 

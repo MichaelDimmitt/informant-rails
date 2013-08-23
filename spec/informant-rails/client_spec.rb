@@ -47,15 +47,15 @@ describe InformantRails::Client do
         before { described_class.inform(model) }
 
         it 'sends the data to the informant' do
-          Typhoeus.should_receive(:post).with(
+          Net::HTTP.should_receive(:post_form).with(
             described_class.send(:api_url),
-            body: request.to_json
+            request.as_json
           )
           described_class.process
         end
 
         it 'removes the request transaction from the cache' do
-          Typhoeus.stub(:post)
+          Net::HTTP.stub(:post_form)
           described_class.process
           expect(described_class.request).to be_nil
         end
@@ -63,7 +63,7 @@ describe InformantRails::Client do
 
       context 'without an api token present' do
         it 'sends the data to the informant' do
-          Typhoeus.should_not_receive(:post)
+          Net::HTTP.should_not_receive(:post_form)
           described_class.process
         end
 
@@ -78,7 +78,7 @@ describe InformantRails::Client do
       before { InformantRails::Config.api_token = '' }
 
       it 'sends the data to the informant' do
-        Typhoeus.should_not_receive(:post)
+        Net::HTTP.should_not_receive(:post_form)
         described_class.process
       end
 

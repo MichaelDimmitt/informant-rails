@@ -15,8 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.summary = "The Informant tells you what's irritating your users."
 
-  s.add_dependency("typhoeus")
-  s.add_dependency("rails")
+  s.add_runtime_dependency("rails")
 
   s.files = Dir.glob("lib/**/*") + %w(LICENSE README.markdown Rakefile)
   s.require_path = 'lib'
