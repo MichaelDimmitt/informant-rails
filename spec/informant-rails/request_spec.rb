@@ -30,7 +30,7 @@ describe InformantRails::Request do
     let(:model) { User.new(name: 'a') }
     before do
       request.request_url = 'example.com/somewhere'
-      request.file_name = 'UsersController'
+      request.filename = 'UsersController'
       request.action = 'create'
       request.process_model(model)
     end
@@ -38,7 +38,7 @@ describe InformantRails::Request do
       should == {
         request_url: 'example.com/somewhere',
         models: [InformantRails::Model.new(model)],
-        file_name: 'UsersController',
+        filename: 'UsersController',
         action: 'create'
       }.to_json
     end

@@ -10,7 +10,7 @@ module InformantRails
 
     def self.inform_action(controller_name, action)
       if request
-        request.file_name = controller_name
+        request.filename = controller_name
         request.action = action
       end
     end
@@ -45,11 +45,11 @@ module InformantRails
     end
 
     def self.api_url
-      @api_url ||= [
-        'http://informant-production.herokuapp.com/v1',
-        Config.api_token,
-        Config.server_environment
-      ].join('/')
+      @api_url ||= URI([
+        'http://informant-production.herokuapp.com/api/v1',
+        InformantRails::Config.api_token,
+        InformantRails::Config.server_environment
+      ].join('/'))
     end
   end
 end
