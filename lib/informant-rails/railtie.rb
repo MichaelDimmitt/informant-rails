@@ -16,10 +16,8 @@ module InformantRails
 
     initializer 'informant ActiveRecord binding' do
       class ::ActiveRecord::Base
-        def valid?(*args)
-          result = super(*args)
+        set_callback(:validate, :after) do
           InformantRails::Client.inform(self)
-          result
         end
       end
     end
