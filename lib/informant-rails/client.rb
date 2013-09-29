@@ -16,7 +16,7 @@ module InformantRails
     end
 
     def self.inform(model)
-      request.process_model(model) if request && model
+      request.process_model(model) if request && include_model?(model)
     end
 
     def self.process
@@ -31,6 +31,10 @@ module InformantRails
     end
 
     private
+
+    def self.include_model?(model)
+      !InformantRails::Config.exclude_models.include?(model.class.to_s)
+    end
 
     def self.new_request
       @requests[request_id] = Request.new
