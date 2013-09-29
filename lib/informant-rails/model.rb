@@ -8,5 +8,9 @@ module InformantRails
         InformantRails::FieldError.new(field.to_s, model[field], error)
       end
     end
+
+    def as_json(*args)
+      { name: name, errors: errors.map(&:as_json) }
+    end
   end
 end

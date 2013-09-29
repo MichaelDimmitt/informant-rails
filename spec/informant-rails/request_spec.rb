@@ -25,9 +25,9 @@ describe InformantRails::Request do
     end
   end
 
-  describe '#to_json' do
-    subject { request.to_json }
-    let(:model) { User.new(name: 'a') }
+  describe '#as_json' do
+    subject { request.as_json }
+    let(:model) { User.new(name: 'a').tap(&:valid?) }
     before do
       request.request_url = 'example.com/somewhere'
       request.filename = 'UsersController'
@@ -36,11 +36,17 @@ describe InformantRails::Request do
     end
     it do
       should == {
+        models: [{
+          name: 'User',
+          errors: [
+            { name: 'email', value: nil, message: "can't be blank" },
+            { name: 'name', value: 'a', message: "is too short (minimum is 2 characters)" }
+          ]
+        }],
         request_url: 'example.com/somewhere',
-        models: [InformantRails::Model.new(model)],
         filename: 'UsersController',
         action: 'create'
-      }.to_json
+      }
     end
   end
 end

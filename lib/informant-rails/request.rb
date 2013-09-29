@@ -9,5 +9,14 @@ module InformantRails
     def models
       @models ||= []
     end
+
+    def as_json(*args)
+      {
+        models: models.map(&:as_json),
+        request_url: request_url,
+        filename: filename,
+        action: action
+      }
+    end
   end
 end
