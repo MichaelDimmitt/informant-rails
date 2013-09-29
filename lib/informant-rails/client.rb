@@ -1,4 +1,4 @@
-require 'net/http'
+require 'typhoeus'
 
 module InformantRails
   class Client
@@ -21,7 +21,9 @@ module InformantRails
 
     def self.process
       if Config.api_token.present? && request && request.models.any?
-        Net::HTTP.post_form(api_url, request.as_json)
+        Typhoeus::Request.new(
+          api_url, method: :post, params: { payload: request.as_json }
+        ).run
       end
       remove_request
     end
@@ -49,11 +51,11 @@ module InformantRails
     end
 
     def self.api_url
-      @api_url ||= URI([
+      @api_url ||= [
         'http://api.informantapp.com/api/v1',
         InformantRails::Config.api_token,
         InformantRails::Config.server_environment
-      ].join('/'))
+      ].join('/')
     end
   end
 end
