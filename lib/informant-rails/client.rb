@@ -46,7 +46,7 @@ module InformantRails
 
     def self.api_url
       @api_url ||= URI([
-        'http://informant-production.herokuapp.com/api/v1',
+        'http://api.informantapp.com/api/v1',
         InformantRails::Config.api_token,
         InformantRails::Config.server_environment
       ].join('/'))
