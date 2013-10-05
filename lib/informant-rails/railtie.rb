@@ -12,6 +12,8 @@ module InformantRails
           )
         end
       end
+
+      InformantRails::Config.filter_parameters = Rails.configuration.filter_parameters
     end
 
     initializer 'informant ActiveRecord binding' do
