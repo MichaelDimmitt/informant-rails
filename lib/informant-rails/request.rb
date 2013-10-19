@@ -3,7 +3,9 @@ module InformantRails
     attr_accessor :request_url, :filename, :action
 
     def process_model(model)
-      models << InformantRails::Model.new(model) if model
+      if model && untracked?(model)
+        models << InformantRails::Model.new(model)
+      end
     end
 
     def models
@@ -17,6 +19,12 @@ module InformantRails
         filename: filename,
         action: action
       }
+    end
+
+    protected
+
+    def untracked?(model)
+      !models.detect { |container| container.model == model }
     end
   end
 end

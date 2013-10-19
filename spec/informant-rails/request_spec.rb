@@ -23,6 +23,23 @@ describe InformantRails::Request do
         expect(request.models).to be_empty
       end
     end
+
+    context 'with a model that has already been stored' do
+      let(:model) { User.new(name: 'a') }
+      before do
+        model.valid?
+        request.process_model(model)
+        model.email = 'someone@example.com'
+        model.valid?
+        request.process_model(model)
+      end
+
+      it 'only stores the lastest model' do
+        expect(request.models.length).to eq(1)
+        expect(request.models.first.errors.length).to eq(1)
+        expect(request.models.first.errors.first.name).to eq('name')
+      end
+    end
   end
 
   describe '#as_json' do
