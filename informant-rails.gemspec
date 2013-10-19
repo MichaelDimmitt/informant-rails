@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors = ["Paul Elliott", "Cameron Daigle"]
   s.email = ["paul@codingfrontier.com"]
   s.description = "The Informant tells you what's irritating your users."
-  s.homepage = "http://www.theinformant.io"
+  s.homepage = "http://www.informantapp.com"
   s.require_paths = ["lib"]
   s.summary = "The Informant tells you what's irritating your users."
 
