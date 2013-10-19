@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    informant-rails (0.0.3)
+    informant-rails (0.0.4)
       rails
       typhoeus
 
