@@ -26,12 +26,12 @@ describe InformantRails::Railtie do
     end
 
     context '#valid?' do
-      let(:save_action) { :save }
+      let(:save_action) { :valid? }
       it_should_behave_like 'save action'
     end
 
     context '#invalid?' do
-      let(:save_action) { :save }
+      let(:save_action) { :invalid? }
       it_should_behave_like 'save action'
     end
   end
