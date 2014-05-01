@@ -5,7 +5,9 @@ module InformantRails
     @requests = {}
 
     def self.record(env)
-      new_request.request_url = env['HTTP_REFERER']
+      unless env['REQUEST_METHOD'] == 'GET'
+        new_request.request_url = env['HTTP_REFERER']
+      end
     end
 
     def self.inform_action(controller_name, action)
@@ -25,6 +27,7 @@ module InformantRails
           api_url, method: :post, params: { payload: request.as_json }
         ).run
       end
+    ensure
       remove_request
     end
 

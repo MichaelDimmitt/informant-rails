@@ -2,15 +2,30 @@ require 'spec_helper'
 
 describe InformantRails::Client do
   describe '.record' do
+    before { described_class.instance_variable_get('@requests').clear }
     let(:request) { described_class.request }
-    let(:env) { Hash['HTTP_REFERER' => 'http://example.com/some/url'] }
-    before { described_class.record(env) }
+    let(:env) do
+      Hash[
+        'HTTP_REFERER' => 'http://example.com/some/url',
+        'REQUEST_METHOD' => 'POST'
+      ]
+    end
+
     it 'stores the referring url' do
+      described_class.record(env)
       expect(request.request_url).to eq 'http://example.com/some/url'
+    end
+
+    it 'does not create the request wrapper for GET requests' do
+      env['REQUEST_METHOD'] = 'GET'
+      described_class.record(env)
+      expect(request).to be_nil
     end
   end
 
   describe '.inform' do
+    before { described_class.record({}) }
+
     context 'with an excluded model' do
       let(:model) { User.new }
       before { InformantRails::Config.exclude_models = %w(User) }
