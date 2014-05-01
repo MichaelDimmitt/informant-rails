@@ -68,7 +68,9 @@ describe InformantRails::Client do
         it 'sends the data to the informant' do
           Typhoeus::Request.should_receive(:new).with(
             described_class.send(:api_url),
-            method: :post, params: { payload: request.as_json }
+            method: :post,
+            params: { payload: request.as_json },
+            headers: { Authorization: "Token token=\"abc123\"" }
           ).and_return(typhoeus_request)
           typhoeus_request.should_receive(:run)
           described_class.process

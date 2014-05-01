@@ -24,7 +24,10 @@ module InformantRails
     def self.process
       if Config.api_token.present? && request && request.models.any?
         Typhoeus::Request.new(
-          api_url, method: :post, params: { payload: request.as_json }
+          api_url,
+          method: :post,
+          params: { payload: request.as_json },
+          headers: { Authorization: ActionController::HttpAuthentication::Token.encode_credentials(InformantRails::Config.api_token) }
         ).run
       end
     ensure
@@ -54,11 +57,7 @@ module InformantRails
     end
 
     def self.api_url
-      @api_url ||= [
-        'http://api.informantapp.com/api/v1',
-        InformantRails::Config.api_token,
-        InformantRails::Config.server_environment
-      ].join('/')
+      @api_url ||= ['http://api.informantapp.com/api/v1', InformantRails::Config.server_environment].join('/')
     end
   end
 end
