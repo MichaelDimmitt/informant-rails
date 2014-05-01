@@ -23,8 +23,4 @@ gem 'informant-rails', group: :production
 
 ## Usage
 
-By default, any request that causes an ActiveRecord model to be validated will be tracked by the Informant once the gem is added to your project. If you have other objects that conform to the ActiveModel interface, you can cause them to be tracked by passing them to the Informant after their validations have run.
-
-```
-InformantRails::Client.inform(model)
-```
+By default, any request that causes an ActiveRecord model to be validated will be tracked by the Informant once the gem is added to your project.
