@@ -69,8 +69,11 @@ describe InformantRails::Client do
           Typhoeus::Request.should_receive(:new).with(
             described_class.send(:api_url),
             method: :post,
-            params: { payload: request.as_json },
-            headers: { Authorization: "Token token=\"abc123\"" }
+            body: { payload: request.as_json },
+            headers: {
+              "Authorization" => "Token token=\"abc123\"",
+              "Content-Type" => "application/json"
+            }
           ).and_return(typhoeus_request)
           typhoeus_request.should_receive(:run)
           described_class.process

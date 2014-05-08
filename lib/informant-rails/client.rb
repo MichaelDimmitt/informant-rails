@@ -26,8 +26,11 @@ module InformantRails
         Typhoeus::Request.new(
           api_url,
           method: :post,
-          params: { payload: request.as_json },
-          headers: { Authorization: ActionController::HttpAuthentication::Token.encode_credentials(InformantRails::Config.api_token) }
+          body: { payload: request.as_json },
+          headers: {
+            "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(InformantRails::Config.api_token),
+            "Content-Type" => "application/json"
+          }
         ).run
       end
     ensure
@@ -57,7 +60,7 @@ module InformantRails
     end
 
     def self.api_url
-      @api_url ||= ['http://api.informantapp.com/api/v1', InformantRails::Config.server_environment].join('/')
+      @api_url ||= ['http://localhost:3000.informantapp.com/api/v1', InformantRails::Config.server_environment].join('/')
     end
   end
 end
