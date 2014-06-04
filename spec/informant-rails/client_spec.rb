@@ -59,7 +59,10 @@ describe InformantRails::Client do
     before { described_class.record({}) }
 
     context 'with an api token' do
-      before { InformantRails::Config.api_token = 'abc123' }
+      before do
+        InformantRails::Config.api_token = 'abc123'
+        InformantRails::Config.server_environment = 'staging'
+      end
 
       context 'and errors present' do
         let(:typhoeus_request) { double }
@@ -67,7 +70,7 @@ describe InformantRails::Client do
 
         it 'sends the data to the informant' do
           Typhoeus::Request.should_receive(:new).with(
-            described_class.send(:api_url),
+            "http://api.informantapp.com/api/v1/staging",
             method: :post,
             body: { payload: request.as_json },
             headers: {
