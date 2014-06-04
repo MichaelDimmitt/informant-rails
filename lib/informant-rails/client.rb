@@ -26,7 +26,7 @@ module InformantRails
         Typhoeus::Request.new(
           api_url,
           method: :post,
-          body: { payload: request.as_json },
+          body: { payload: request }.to_json,
           headers: {
             "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(InformantRails::Config.api_token),
             "Content-Type" => "application/json"

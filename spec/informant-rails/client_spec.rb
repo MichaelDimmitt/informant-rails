@@ -72,7 +72,7 @@ describe InformantRails::Client do
           Typhoeus::Request.should_receive(:new).with(
             "http://api.informantapp.com/api/v1/staging",
             method: :post,
-            body: { payload: request.as_json },
+            body: { payload: request }.to_json,
             headers: {
               "Authorization" => "Token token=\"abc123\"",
               "Content-Type" => "application/json"
