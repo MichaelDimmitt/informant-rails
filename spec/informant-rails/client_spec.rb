@@ -70,7 +70,7 @@ describe InformantRails::Client do
 
         it 'sends the data to the informant' do
           Typhoeus::Request.should_receive(:new).with(
-            "http://api.informantapp.com/api/v1/staging",
+            "https://api.informantapp.com/api/v1/staging",
             method: :post,
             body: { payload: request }.to_json,
             headers: {
