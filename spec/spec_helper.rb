@@ -1,8 +1,8 @@
-require 'bundler'
+require 'bundler/setup'
 
-require 'rails/all'
+Bundler.require(:default)
 
-Bundler.require(:default, :gemspec)
+require 'informant-rails'
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 

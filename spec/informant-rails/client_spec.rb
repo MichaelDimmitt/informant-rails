@@ -31,7 +31,7 @@ describe InformantRails::Client do
       before { InformantRails::Config.exclude_models = %w(User) }
       after { InformantRails::Config.exclude_models = [] }
       it 'does not process the model' do
-        described_class.request.should_not_receive(:process_model)
+        expect(described_class.request).to_not receive(:process_model)
         described_class.record_validated_model(model)
       end
     end
@@ -39,15 +39,15 @@ describe InformantRails::Client do
     context 'within a request transaction' do
       let(:model) { double }
       it 'processes the model' do
-        described_class.request.should_receive(:process_model).with(model)
+        expect(described_class.request).to receive(:process_model).with(model)
         described_class.record_validated_model(model)
       end
     end
 
     context 'without a request transaction' do
       it 'does not process anything' do
-        described_class.should_receive(:request)
-        InformantRails::Request.any_instance.should_not_receive(:process_model)
+        described_class.instance_variable_get("@requests").clear
+        expect_any_instance_of(InformantRails::Request).to_not receive(:process_model)
         described_class.record_validated_model(double)
       end
     end
@@ -69,7 +69,7 @@ describe InformantRails::Client do
         before { described_class.record_validated_model(model) }
 
         it 'sends the data to the informant' do
-          Typhoeus::Request.should_receive(:new).with(
+          expect(Typhoeus::Request).to receive(:new).with(
             "https://api.informantapp.com/api/v1/staging",
             method: :post,
             body: { payload: request }.to_json,
@@ -78,7 +78,7 @@ describe InformantRails::Client do
               "Content-Type" => "application/json"
             }
           ).and_return(typhoeus_request)
-          typhoeus_request.should_receive(:run)
+          expect(typhoeus_request).to receive(:run)
           described_class.process
         end
 
@@ -90,7 +90,7 @@ describe InformantRails::Client do
 
       context 'without an api token present' do
         it 'sends the data to the informant' do
-          Net::HTTP.should_not_receive(:post_form)
+          expect(Typhoeus::Request).to_not receive(:new)
           described_class.process
         end
 
@@ -105,7 +105,7 @@ describe InformantRails::Client do
       before { InformantRails::Config.api_token = '' }
 
       it 'sends the data to the informant' do
-        Net::HTTP.should_not_receive(:post_form)
+        expect(Typhoeus::Request).to_not receive(:new)
         described_class.process
       end
 

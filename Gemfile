@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
-gemspec
+gem 'appraisal'
+gem 'typhoeus'
 
-gem 'pry'
-gem 'rake'
-gem 'rspec'
-gem 'sqlite3'
+group :test do
+  gem 'pry'
+  gem 'rake'
+  gem 'rspec'
+  gem 'sqlite3'
+end
