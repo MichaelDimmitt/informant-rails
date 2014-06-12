@@ -19,7 +19,7 @@ module InformantRails
     initializer 'informant ActiveRecord binding' do
       class ::ActiveRecord::Base
         set_callback(:validate, :after) do
-          InformantRails::Client.inform(self)
+          InformantRails::Client.record_validated_model(self)
         end
       end
     end

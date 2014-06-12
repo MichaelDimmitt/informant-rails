@@ -4,7 +4,7 @@ shared_examples 'save action' do
   context 'with an invalid model' do
     let(:model) { User.new }
     it 'gets called' do
-      InformantRails::Client.should receive(:inform).with(model)
+      InformantRails::Client.should receive(:record_validated_model).with(model)
       model.public_send(save_action)
     end
   end
@@ -12,7 +12,7 @@ shared_examples 'save action' do
   context 'with a valid model' do
     let(:model) { User.new(name: 'Han Solo', email: 'han@starwars.com') }
     it 'gets called' do
-      InformantRails::Client.should receive(:inform).with(model)
+      InformantRails::Client.should receive(:record_validated_model).with(model)
       model.public_send(save_action)
     end
   end

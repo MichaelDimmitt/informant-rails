@@ -17,7 +17,7 @@ module InformantRails
       end
     end
 
-    def self.inform(model)
+    def self.record_validated_model(model)
       request.process_model(model) if request && include_model?(model)
     end
 

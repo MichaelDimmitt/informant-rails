@@ -23,7 +23,7 @@ describe InformantRails::Client do
     end
   end
 
-  describe '.inform' do
+  describe '.record_validated_model' do
     before { described_class.record({}) }
 
     context 'with an excluded model' do
@@ -32,7 +32,7 @@ describe InformantRails::Client do
       after { InformantRails::Config.exclude_models = [] }
       it 'does not process the model' do
         described_class.request.should_not_receive(:process_model)
-        described_class.inform(model)
+        described_class.record_validated_model(model)
       end
     end
 
@@ -40,7 +40,7 @@ describe InformantRails::Client do
       let(:model) { double }
       it 'processes the model' do
         described_class.request.should_receive(:process_model).with(model)
-        described_class.inform(model)
+        described_class.record_validated_model(model)
       end
     end
 
@@ -48,7 +48,7 @@ describe InformantRails::Client do
       it 'does not process anything' do
         described_class.should_receive(:request)
         InformantRails::Request.any_instance.should_not_receive(:process_model)
-        described_class.inform(double)
+        described_class.record_validated_model(double)
       end
     end
   end
@@ -66,7 +66,7 @@ describe InformantRails::Client do
 
       context 'and errors present' do
         let(:typhoeus_request) { double }
-        before { described_class.inform(model) }
+        before { described_class.record_validated_model(model) }
 
         it 'sends the data to the informant' do
           Typhoeus::Request.should_receive(:new).with(
