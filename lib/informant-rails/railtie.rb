@@ -7,7 +7,7 @@ module InformantRails
     initializer 'informant ActionController binding' do
       class ::ActionController::Base
         before_filter do
-          InformantRails::Client.inform_action(
+          InformantRails::Client.record_action(
             controller_name, action_name
           )
         end

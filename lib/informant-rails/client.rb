@@ -10,7 +10,7 @@ module InformantRails
       end
     end
 
-    def self.inform_action(controller_name, action)
+    def self.record_action(controller_name, action)
       if request
         request.filename = controller_name
         request.action = action
