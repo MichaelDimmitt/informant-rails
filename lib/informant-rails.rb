@@ -8,4 +8,5 @@ module InformantRails
   autoload :Model,           'informant-rails/model'
   autoload :Request,         'informant-rails/request'
   autoload :ParameterFilter, 'informant-rails/parameter_filter'
+  autoload :VERSION,         'informant-rails/version'
 end

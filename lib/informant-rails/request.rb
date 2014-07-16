@@ -17,7 +17,8 @@ module InformantRails
         models: models.map(&:as_json),
         request_url: request_url,
         filename: filename,
-        action: action
+        action: action,
+        client: "informant-rails-#{InformantRails::VERSION}"
       }
     end
 
