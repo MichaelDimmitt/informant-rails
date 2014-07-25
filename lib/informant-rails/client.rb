@@ -60,7 +60,7 @@ module InformantRails
     end
 
     def self.api_url
-      @api_url ||= ['https://api.informantapp.com/api/v1', InformantRails::Config.server_environment].join('/')
+      @api_url ||= 'https://api.informantapp.com/api/v1/form_submissions'
     end
   end
 end
