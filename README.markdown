@@ -10,8 +10,8 @@ The informant-rails gem provides Rails and ActiveRecord hooks for The Informant.
 
 The informant-rails gem is tested against Ruby 1.9.3, 2.0.0, and Rubinius.
 
-[![Build Status](https://secure.travis-ci.org/theinformant/informant-rails.png)](http://travis-ci.org/informant/informant-rails)
-[![Code Climate](https://codeclimate.com/github/theinformant/informant-rails.png)](https://codeclimate.com/github/informant/informant-rails)
+[![Build Status](https://travis-ci.org/informantapp/informant-rails.svg?branch=master)](https://travis-ci.org/informantapp/informant-rails)
+[![Code Climate](https://codeclimate.com/github/informantapp/informant-rails.png)](https://codeclimate.com/github/informantapp/informant-rails)
 
 ## Installation
 
