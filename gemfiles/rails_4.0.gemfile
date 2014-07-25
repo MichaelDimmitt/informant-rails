@@ -4,11 +4,8 @@ source "https://rubygems.org"
 
 gem "appraisal"
 gem "typhoeus"
+gem "pry"
+gem "rake"
+gem "rspec"
+gem "sqlite3"
 gem "rails", "~> 4.0.0", :require => "rails/all"
-
-group :test do
-  gem "pry"
-  gem "rake"
-  gem "rspec"
-  gem "sqlite3"
-end
