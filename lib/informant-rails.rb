@@ -1,6 +1,9 @@
 require 'informant-rails/railtie'
 
-load File.join(File.dirname(__FILE__), 'tasks', 'test_connection.rake')
+if defined?(Rake)
+  require 'rake'
+  Dir[File.join(File.dirname(__FILE__), 'tasks', '**/*.rake')].each { |rake| load rake }
+end
 
 module InformantRails
   autoload :Config,           'informant-rails/config'
