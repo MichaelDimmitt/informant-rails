@@ -19,7 +19,7 @@ shared_examples 'save action' do
 end
 
 describe InformantRails::Railtie do
-  context 'from an ActiveRecord model' do
+  context 'from a model' do
     context '#save' do
       let(:save_action) { :save }
       it_should_behave_like 'save action'

@@ -9,7 +9,12 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].e
 
 RSpec.configure do |config|
   config.before(:each) do
-    TestMigration.up
+    if defined?(ActiveRecord)
+      TestMigration.up
+    elsif defined?(Mongoid)
+      clear_mongodb
+    end
+
     InformantRails::Config.filter_parameters = [:password]
   end
 end
