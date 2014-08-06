@@ -1,3 +1,9 @@
+### 0.5.0 ###
+
+* Prevent initialization of hooks if API token is not present
+* Add support for Mongoid
+* Allow any ActiveModel object to take advantage of validation tracking
+
 ### 0.4.1 ###
 
 * Require rake in informant-rails.rb
