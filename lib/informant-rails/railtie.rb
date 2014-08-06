@@ -22,10 +22,9 @@ module InformantRails
 
     initializer 'informant ActiveRecord binding' do
       if InformantRails::Config.api_token
-        class ::ActiveRecord::Base
-          set_callback(:validate, :after) do
-            InformantRails::Client.record_validated_model(self)
-          end
+
+        ActiveSupport.on_load(:active_record) do
+          include InformantRails::ValidationTracking
         end
       end
     end
