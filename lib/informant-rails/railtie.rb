@@ -8,10 +8,8 @@ module InformantRails
 
     initializer 'informant ActionController binding' do
       if InformantRails::Config.api_token
-        class ::ActionController::Base
-          before_filter do
-            InformantRails::Client.record_action(controller_name, action_name)
-          end
+        ActiveSupport.on_load :action_controller do
+          include InformantRails::RequestTracking
         end
 
         InformantRails::Config.filter_parameters = Rails.configuration.filter_parameters
