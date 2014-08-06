@@ -1,25 +1,31 @@
 module InformantRails
   class Railtie < ::Rails::Railtie
     initializer 'informant middleware' do |config|
-      config.middleware.use 'InformantRails::Middleware'
+      if InformantRails::Config.api_token
+        config.middleware.use 'InformantRails::Middleware'
+      end
     end
 
     initializer 'informant ActionController binding' do
-      class ::ActionController::Base
-        before_filter do
-          InformantRails::Client.record_action(
-            controller_name, action_name
-          )
+      if InformantRails::Config.api_token
+        class ::ActionController::Base
+          before_filter do
+            InformantRails::Client.record_action(
+              controller_name, action_name
+            )
+          end
         end
-      end
 
-      InformantRails::Config.filter_parameters = Rails.configuration.filter_parameters
+        InformantRails::Config.filter_parameters = Rails.configuration.filter_parameters
+      end
     end
 
     initializer 'informant ActiveRecord binding' do
-      class ::ActiveRecord::Base
-        set_callback(:validate, :after) do
-          InformantRails::Client.record_validated_model(self)
+      if InformantRails::Config.api_token
+        class ::ActiveRecord::Base
+          set_callback(:validate, :after) do
+            InformantRails::Client.record_validated_model(self)
+          end
         end
       end
     end

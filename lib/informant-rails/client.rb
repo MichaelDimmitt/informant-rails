@@ -22,7 +22,7 @@ module InformantRails
     end
 
     def self.process
-      if Config.api_token.present? && request && request.models.any?
+      if request && request.models.any?
         Typhoeus::Request.new(
           api_url,
           method: :post,

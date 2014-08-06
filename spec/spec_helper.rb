@@ -3,6 +3,7 @@ require 'bundler/setup'
 Bundler.require(:default)
 
 require 'informant-rails'
+InformantRails::Config.api_token = 'abc123'
 
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 

@@ -59,8 +59,6 @@ describe InformantRails::Client do
     before { described_class.record({}) }
 
     context 'with an api token' do
-      before { InformantRails::Config.api_token = 'abc123' }
-
       context 'and errors present' do
         let(:typhoeus_request) { double }
         before { described_class.record_validated_model(model) }
@@ -86,6 +84,8 @@ describe InformantRails::Client do
       end
 
       context 'without an api token present' do
+        before { InformantRails::Config.api_token = nil }
+
         it 'sends the data to the informant' do
           expect(Typhoeus::Request).to_not receive(:new)
           described_class.process

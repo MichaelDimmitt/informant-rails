@@ -1,5 +1,3 @@
-require 'informant-rails/railtie'
-
 if defined?(Rake)
   require 'rake'
   Dir[File.join(File.dirname(__FILE__), 'tasks', '**/*.rake')].each { |rake| load rake }
@@ -16,3 +14,5 @@ module InformantRails
   autoload :ParameterFilter,  'informant-rails/parameter_filter'
   autoload :VERSION,          'informant-rails/version'
 end
+
+require 'informant-rails/railtie'
