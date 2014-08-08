@@ -8,7 +8,13 @@ The informant-rails gem provides Rails and ActiveRecord hooks for The Informant.
 
 ## Compatibility
 
-The informant-rails gem is tested against Ruby 1.9.3, 2.0.0, and Rubinius.
+The informant-rails gem supports the following versions of Ruby:
+- 1.9.x
+- 2.x
+- rubinius
+- jruby
+
+It will work automatically with Rails 3.x / 4.x and Mongoid 3.x / 4.x.
 
 [![Build Status](https://travis-ci.org/informantapp/informant-rails.svg?branch=master)](https://travis-ci.org/informantapp/informant-rails)
 [![Code Climate](https://codeclimate.com/github/informantapp/informant-rails.png)](https://codeclimate.com/github/informantapp/informant-rails)
@@ -37,7 +43,7 @@ end
 
 ## Configuration
 
-Configuration options are specified in the `InformantRails::Config` module. Reasonable defaults are provided, but you can override them as necessary. by creating an initializer and passing a block to `configure`.
+Configuration options are specified in the `InformantRails::Config` module. Reasonable defaults are provided but you can override them as necessary by creating an initializer and passing a block to `configure`.
 
 ```
 InformantRails::Config.configure do |config|
@@ -51,9 +57,9 @@ end
 
 Default Value: `ENV['INFORMANT_API_KEY']`
 
-Example Value: dff67d9e61eaa8cf110b3d3f3238a671
+Example Value: `dff67d9e61eaa8cf110b3d3f3238a671`
 
-This should be set to the API key assigned to you when you provisioned your application. You can get this from the Informant web application.
+This should be set to the API key assigned to you when you provisioned your application. Heroku will automatically add this to your environment when you provision the addon. Otherwise, you can get this from the Informant web application.
 
 ### exclude_models
 
@@ -65,8 +71,8 @@ This allows you to exclude certain models from tracking. If you don't want them 
 
 ### filter_parameters
 
-Default Value: Rails.configuration.filter_parameters
+Default Value: `Rails.configuration.filter_parameters`
 
-Example Value: ['password', 'password_confirmation']
+Example Value: `['password', 'password_confirmation']`
 
 Any field names specified here will not be included in value tracking. Any sensitive information that you wouldn't want to include in your server log should be listed here as well.
