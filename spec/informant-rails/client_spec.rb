@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe InformantRails::Client do
   describe '.record' do
-    before { described_class.instance_variable_get('@requests').clear }
     let(:request) { described_class.request }
     let(:env) do
       Hash[
@@ -46,7 +45,7 @@ describe InformantRails::Client do
 
     context 'without a request transaction' do
       it 'does not process anything' do
-        described_class.instance_variable_get("@requests").clear
+        described_class.cleanup
         expect_any_instance_of(InformantRails::Request).to_not receive(:process_model)
         described_class.record_validated_model(double)
       end

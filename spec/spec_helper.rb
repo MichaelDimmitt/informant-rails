@@ -16,5 +16,6 @@ RSpec.configure do |config|
     end
 
     InformantRails::Config.filter_parameters = [:password]
+    InformantRails::Client.cleanup
   end
 end

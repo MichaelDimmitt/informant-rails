@@ -2,7 +2,6 @@ require 'typhoeus'
 
 module InformantRails
   class Client
-    @requests = {}
 
     def self.record(env)
       unless env['REQUEST_METHOD'] == 'GET'
@@ -34,11 +33,15 @@ module InformantRails
         ).run
       end
     ensure
-      remove_request
+      cleanup
     end
 
     def self.request
-      @requests[request_id]
+      Thread.current[:informant_request]
+    end
+
+    def self.cleanup
+      Thread.current[:informant_request] = nil
     end
 
     private
@@ -48,19 +51,12 @@ module InformantRails
     end
 
     def self.new_request
-      @requests[request_id] = Request.new
-    end
-
-    def self.remove_request
-      @requests.delete(request_id)
-    end
-
-    def self.request_id
-      Thread.current.object_id
+      Thread.current[:informant_request] = Request.new
     end
 
     def self.api_url
       @api_url ||= 'https://api.informantapp.com/api/v1/form_submissions'
     end
+
   end
 end

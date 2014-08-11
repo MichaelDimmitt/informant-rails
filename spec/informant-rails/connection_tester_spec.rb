@@ -8,10 +8,7 @@ describe InformantRails::ConnectionTester do
     expect(tester).to receive(:assistance_message)
   end
 
-  after do
-    tester.run
-    InformantRails::Client.send(:remove_request)
-  end
+  after { tester.run }
 
   context 'missing api token' do
     it 'does not make a request' do
