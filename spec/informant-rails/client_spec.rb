@@ -79,12 +79,13 @@ describe InformantRails::Client do
   describe '.process' do
     let(:request) { described_class.request }
     let(:model) { User.new.tap(&:save) }
-    before do
-      described_class.record({})
-      described_class.record_validated_model(model)
-    end
 
     context 'with an api token' do
+      before do
+        described_class.record({})
+        described_class.record_validated_model(model)
+      end
+
       context 'and errors present' do
         it 'sends the data to the informant' do
           expect(Thread).to receive(:new)
@@ -99,7 +100,11 @@ describe InformantRails::Client do
     end
 
     context 'without an api token present' do
-      before { InformantRails::Config.api_token = nil }
+      before do
+        InformantRails::Config.api_token = nil
+        described_class.record({})
+        described_class.record_validated_model(model)
+      end
 
       it 'does not transmit' do
         expect(Thread).to_not receive(:new)

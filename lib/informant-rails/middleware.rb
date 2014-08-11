@@ -1,9 +1,9 @@
 module InformantRails
   class Middleware < Struct.new(:app)
     def call(env)
-      InformantRails::Client.record(env)
+      Client.record(env)
       response = app.call(env)
-      InformantRails::Client.process
+      Client.process
       response
     end
   end

@@ -4,7 +4,7 @@ module InformantRails
   class Client
 
     def self.record(env)
-      unless env['REQUEST_METHOD'] == 'GET'
+      unless Config.api_token.blank? || env['REQUEST_METHOD'] == 'GET'
         new_request.request_url = env['HTTP_REFERER']
       end
     end
@@ -21,7 +21,7 @@ module InformantRails
     end
 
     def self.process
-      if Config.api_token.present? && request && request.models.any?
+      if request && request.models.any?
         this_request = request
         Thread.new { transmit(this_request) }
       end
