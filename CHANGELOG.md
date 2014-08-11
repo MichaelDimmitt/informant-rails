@@ -1,3 +1,8 @@
+### 0.6.0 ###
+
+* Performance improvements
+* Fixed a bug where a manually set API token may not be properly registered
+
 ### 0.5.0 ###
 
 * Prevent initialization of hooks if API token is not present
