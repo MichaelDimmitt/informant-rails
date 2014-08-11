@@ -52,27 +52,42 @@ describe InformantRails::Client do
     end
   end
 
+  describe '.transmit' do
+    let(:typhoeus_request) { double }
+    let(:request) { described_class.request }
+    let(:model) { User.new.tap(&:save) }
+    before do
+      described_class.record({})
+      described_class.record_validated_model(model)
+    end
+
+    it 'sends the data to the informant' do
+      expect(Typhoeus::Request).to receive(:new).with(
+        "https://api.informantapp.com/api/v1/form_submissions",
+        method: :post,
+        body: { payload: request }.to_json,
+        headers: {
+          "Authorization" => "Token token=\"abc123\"",
+          "Content-Type" => "application/json"
+        }
+      ).and_return(typhoeus_request)
+      expect(typhoeus_request).to receive(:run)
+      described_class.transmit(request)
+    end
+  end
+
   describe '.process' do
     let(:request) { described_class.request }
     let(:model) { User.new.tap(&:save) }
-    before { described_class.record({}) }
+    before do
+      described_class.record({})
+      described_class.record_validated_model(model)
+    end
 
     context 'with an api token' do
       context 'and errors present' do
-        let(:typhoeus_request) { double }
-        before { described_class.record_validated_model(model) }
-
         it 'sends the data to the informant' do
-          expect(Typhoeus::Request).to receive(:new).with(
-            "https://api.informantapp.com/api/v1/form_submissions",
-            method: :post,
-            body: { payload: request }.to_json,
-            headers: {
-              "Authorization" => "Token token=\"abc123\"",
-              "Content-Type" => "application/json"
-            }
-          ).and_return(typhoeus_request)
-          expect(typhoeus_request).to receive(:run)
+          expect(Thread).to receive(:new)
           described_class.process
         end
 
@@ -81,19 +96,19 @@ describe InformantRails::Client do
           expect(described_class.request).to be_nil
         end
       end
+    end
 
-      context 'without an api token present' do
-        before { InformantRails::Config.api_token = nil }
+    context 'without an api token present' do
+      before { InformantRails::Config.api_token = nil }
 
-        it 'sends the data to the informant' do
-          expect(Typhoeus::Request).to_not receive(:new)
-          described_class.process
-        end
+      it 'does not transmit' do
+        expect(Thread).to_not receive(:new)
+        described_class.process
+      end
 
-        it 'removes the request transaction from the cache' do
-          described_class.process
-          expect(described_class.request).to be_nil
-        end
+      it 'clears out the request container' do
+        described_class.process
+        expect(described_class.request).to be_nil
       end
     end
 

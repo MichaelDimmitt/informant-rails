@@ -21,16 +21,9 @@ module InformantRails
     end
 
     def self.process
-      if request && request.models.any?
-        Typhoeus::Request.new(
-          api_url,
-          method: :post,
-          body: { payload: request }.to_json,
-          headers: {
-            "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(InformantRails::Config.api_token),
-            "Content-Type" => "application/json"
-          }
-        ).run
+      if Config.api_token.present? && request && request.models.any?
+        this_request = request
+        Thread.new { transmit(this_request) }
       end
     ensure
       cleanup
@@ -44,10 +37,22 @@ module InformantRails
       Thread.current[:informant_request] = nil
     end
 
+    def self.transmit(completed_request)
+      Typhoeus::Request.new(
+        api_url,
+        method: :post,
+        body: { payload: completed_request }.to_json,
+        headers: {
+          "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(Config.api_token),
+          "Content-Type" => "application/json"
+        }
+      ).run
+    end
+
     private
 
     def self.include_model?(model)
-      !InformantRails::Config.exclude_models.include?(model.class.to_s)
+      !Config.exclude_models.include?(model.class.to_s)
     end
 
     def self.new_request
