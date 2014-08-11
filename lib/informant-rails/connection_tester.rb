@@ -3,16 +3,16 @@ module InformantRails
     def self.run; new.run end
 
     def run
-      if InformantRails::Config.api_token.blank?
+      if Config.api_token.blank?
         Rails.logger.info missing_api_token_message
       else
-        InformantRails::Client.record('HTTP_REFERER' => '/connectivity/test')
-        InformantRails::Client.record_action('Connectivity', 'test')
-        InformantRails::Client.request.instance_variable_set('@models', [{
+        Client.record('HTTP_REFERER' => '/connectivity/test')
+        Client.record_action('Connectivity', 'test')
+        Client.request.instance_variable_set('@models', [{
           name: 'TestClass',
           errors: [name: 'field_name', value: 'field_value', message: 'must be unique']
         }])
-        response = InformantRails::Client.process
+        response = Client.transmit(Client.request)
 
         if response.success?
           Rails.logger.info success_message
