@@ -13,3 +13,6 @@ matrix:
       gemfile: gemfiles/rails_3.2.gemfile
     - rvm: jruby
       gemfile: gemfiles/mongoid_4.0.gemfile
+
+services:
+  - mongodb
