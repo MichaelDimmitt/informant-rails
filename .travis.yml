@@ -10,6 +10,6 @@ gemfile:
 matrix:
   include:
     - rvm: 1.9.2
-      gemfile: gemfiles/rails_4.0.gemfile
+      gemfile: gemfiles/rails_3.2.gemfile
     - rvm: jruby
       gemfile: gemfiles/mongoid_4.0.gemfile
