@@ -1,3 +1,8 @@
+### 0.7.0 ###
+
+* Add a configuration option to completely disable field value tracking
+* Replace typhoeus with Net::HTTP
+
 ### 0.6.0 ###
 
 * Performance improvements
