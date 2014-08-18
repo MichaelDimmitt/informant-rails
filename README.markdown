@@ -50,6 +50,7 @@ InformantRails::Config.configure do |config|
   config.api_token = ENV['INFORMANT_API_KEY']
   config.exclude_models = %w(UntrackedModel)
   config.filter_parameters.push *%w(password password_confirmation)
+  config.value_tracking = true
 end
 ```
 
@@ -76,3 +77,11 @@ Default Value: `Rails.configuration.filter_parameters`
 Example Value: `['password', 'password_confirmation']`
 
 Any field names specified here will not be included in value tracking. Any sensitive information that you wouldn't want to include in your server log should be listed here as well.
+
+### filter_parameters
+
+Default Value: `true`
+
+Example Value: `false`
+
+This will enable and disable tracking of values globally. If you turn this off, no field value information will be sent at all. This is useful if you have compliance or security concerns about the nature of your data.

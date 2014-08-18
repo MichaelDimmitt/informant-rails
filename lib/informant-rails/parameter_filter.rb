@@ -1,13 +1,13 @@
 module InformantRails
   class ParameterFilter
     def self.filter(name, value)
-      value && matcher.match(name) ? '[FILTERED]' : value
+      Config.value_tracking && !matcher.match(name) ? value : '[FILTERED]'
     end
 
     protected
 
     def self.matcher
-      @matcher ||= Regexp.new(/#{InformantRails::Config.filter_parameters.join('|').presence || '$^'}/)
+      @matcher ||= Regexp.new(/#{Config.filter_parameters.join('|').presence || '$^'}/)
     end
   end
 end
