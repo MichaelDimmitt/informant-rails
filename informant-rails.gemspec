@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.summary = "The Informant tells you what's irritating your users."
 
   s.add_runtime_dependency("rails", ">= 3.0.0")
-  s.add_runtime_dependency("typhoeus")
 
   s.files = Dir.glob("lib/**/*") + %w(LICENSE README.markdown Rakefile)
   s.require_path = 'lib'

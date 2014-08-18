@@ -53,26 +53,38 @@ describe InformantRails::Client do
   end
 
   describe '.transmit' do
-    let(:typhoeus_request) { double }
-    let(:request) { described_class.request }
     let(:model) { User.new.tap(&:save) }
+    let(:uri) { URI("https://api.informantapp.com/api/v1/form_submissions") }
+    let(:net_http) { double }
     before do
       described_class.record({})
       described_class.record_validated_model(model)
     end
 
     it 'sends the data to the informant' do
-      expect(Typhoeus::Request).to receive(:new).with(
-        "https://api.informantapp.com/api/v1/form_submissions",
-        method: :post,
-        body: { payload: request }.to_json,
-        headers: {
-          "Authorization" => "Token token=\"abc123\"",
-          "Content-Type" => "application/json"
-        }
-      ).and_return(typhoeus_request)
-      expect(typhoeus_request).to receive(:run)
-      described_class.transmit(request)
+      expect(Net::HTTP).to receive(:start).with(
+        'api.informantapp.com', uri.port, use_ssl: true
+      ).and_return(net_http)
+
+      described_class.transmit(described_class.request)
+    end
+  end
+
+  describe '.net_http_post_request' do
+    let(:uri) { URI("https://api.informantapp.com/api/v1/form_submissions") }
+    let(:net_http_post) { double }
+
+    it 'prepares the post request' do
+      expect(Net::HTTP::Post).to receive(:new).with(uri, {
+        "Authorization" => "Token token=\"abc123\"",
+        "Content-Type" => "application/json"
+      }).and_return(net_http_post)
+
+      expect(net_http_post).to receive(:body=).with(
+        { payload: described_class.request }.to_json
+      )
+
+      described_class.send(:net_http_post_request, described_class.request)
     end
   end
 
@@ -121,7 +133,7 @@ describe InformantRails::Client do
       before { InformantRails::Config.api_token = '' }
 
       it 'sends the data to the informant' do
-        expect(Typhoeus::Request).to_not receive(:new)
+        expect(InformantRails::Client).to_not receive(:transmit)
         described_class.process
       end
 

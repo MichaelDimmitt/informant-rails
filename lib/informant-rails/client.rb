@@ -1,5 +1,3 @@
-require 'typhoeus'
-
 module InformantRails
   class Client
 
@@ -38,18 +36,19 @@ module InformantRails
     end
 
     def self.transmit(completed_request)
-      Typhoeus::Request.new(
-        api_url,
-        method: :post,
-        body: { payload: completed_request }.to_json,
-        headers: {
-          "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(Config.api_token),
-          "Content-Type" => "application/json"
-        }
-      ).run
+      Net::HTTP.start(api_endpoint.host, api_endpoint.port, use_ssl: api_endpoint.scheme == 'https') do |http|
+        http.request(net_http_post_request(completed_request))
+      end
     end
 
     private
+
+    def self.net_http_post_request(completed_request)
+      Net::HTTP::Post.new(api_endpoint, {
+        "Authorization" => ActionController::HttpAuthentication::Token.encode_credentials(Config.api_token),
+        "Content-Type" => "application/json"
+      }).tap { |r| r.body = { payload: completed_request }.to_json }
+    end
 
     def self.include_model?(model)
       !Config.exclude_models.include?(model.class.to_s)
@@ -59,8 +58,8 @@ module InformantRails
       Thread.current[:informant_request] = Request.new
     end
 
-    def self.api_url
-      @api_url ||= 'https://api.informantapp.com/api/v1/form_submissions'
+    def self.api_endpoint
+      @api_endpoint ||= URI('https://api.informantapp.com/api/v1/form_submissions')
     end
 
   end
