@@ -66,7 +66,7 @@ This should be set to the API key assigned to you when you provisioned your appl
 
 Default Value: `[]`
 
-Default Value: `['Person', 'Employee']`
+Example Value: `['Person', 'Employee']`
 
 This allows you to exclude certain models from tracking. If you don't want them to be included, just list their class names as strings.
 
@@ -78,7 +78,7 @@ Example Value: `['password', 'password_confirmation']`
 
 Any field names specified here will not be included in value tracking. Any sensitive information that you wouldn't want to include in your server log should be listed here as well.
 
-### filter_parameters
+### value_tracking
 
 Default Value: `true`
 
