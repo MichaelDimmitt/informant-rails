@@ -63,7 +63,7 @@ describe InformantRails::Request do
         request_url: 'example.com/somewhere',
         filename: 'UsersController',
         action: 'create',
-        client: "informant-rails-#{InformantRails::VERSION}"
+        client: InformantRails::Config.client_identifier
       }
     end
   end

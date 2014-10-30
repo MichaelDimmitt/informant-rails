@@ -18,7 +18,7 @@ module InformantRails
         request_url: request_url,
         filename: filename,
         action: action,
-        client: "informant-rails-#{InformantRails::VERSION}"
+        client: InformantRails::Config.client_identifier
       }
     end
 
