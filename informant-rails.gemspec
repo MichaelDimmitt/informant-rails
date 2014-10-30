@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.license = "GPL"
 
   s.authors = ["Paul Elliott", "Cameron Daigle"]
-  s.email = ["paul@codingfrontier.com"]
+  s.email = ["informantapp@gmail.com"]
   s.description = "The Informant tells you what's irritating your users."
   s.homepage = "https://www.informantapp.com"
   s.require_paths = ["lib"]
