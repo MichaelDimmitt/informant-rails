@@ -1,3 +1,7 @@
+### 0.7.1 ###
+
+* Make client identifier more easily accessible
+
 ### 0.7.0 ###
 
 * Add a configuration option to completely disable field value tracking
