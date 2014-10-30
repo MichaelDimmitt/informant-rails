@@ -9,4 +9,8 @@ module InformantRails::Config
   self.value_tracking = true
 
   def configure; yield self end
+
+  def self.client_identifier
+    @client_identifier ||= "informant-rails-#{InformantRails::VERSION}"
+  end
 end
