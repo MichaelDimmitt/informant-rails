@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.summary = "The Informant tracks server-side validation errors and gives you metrics you never dreamed of."
 
-  s.add_runtime_dependency("rails", ">= 3.0.0", "< 4.2.0")
+  s.add_runtime_dependency("rails", ">= 3.0.0", "< 4.3.0")
 
   s.files = Dir.glob("lib/**/*") + %w(LICENSE README.markdown Rakefile)
   s.require_path = 'lib'
