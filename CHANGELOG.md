@@ -1,3 +1,7 @@
+### 0.8.0 ###
+
+* Support for Rails 4.2
+
 ### 0.7.1 ###
 
 * Make client identifier more easily accessible
