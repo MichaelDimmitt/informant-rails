@@ -13,7 +13,7 @@ The informant-rails gem supports the following versions of Ruby:
 - rubinius
 - jruby
 
-It will work automatically with Rails 3.x / 4.x and Mongoid 3.x / 4.x.
+It will work automatically with Rails 3 and up as well as Mongoid 3 and up.
 
 [![Build Status](https://travis-ci.org/informantapp/informant-rails.svg?branch=master)](https://travis-ci.org/informantapp/informant-rails)
 [![Code Climate](https://codeclimate.com/github/informantapp/informant-rails.png)](https://codeclimate.com/github/informantapp/informant-rails)
