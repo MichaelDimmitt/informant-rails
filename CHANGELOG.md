@@ -1,3 +1,7 @@
+### 0.9.0 ###
+
+* Support for Rails 5.0
+
 ### 0.8.0 ###
 
 * Support for Rails 4.2
