@@ -1,5 +1,4 @@
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.1.2
   - 2.2.0
@@ -10,8 +9,6 @@ gemfile:
 
 matrix:
   include:
-    - rvm: 1.9.2
-      gemfile: gemfiles/rails_3.2.gemfile
     - rvm: jruby
       gemfile: gemfiles/mongoid_4.0.gemfile
 

@@ -9,7 +9,6 @@ The informant-rails gem provides Rails and ActiveRecord hooks for The Informant.
 ## Compatibility
 
 The informant-rails gem supports the following versions of Ruby:
-- 1.9.x
 - 2.x
 - rubinius
 - jruby
