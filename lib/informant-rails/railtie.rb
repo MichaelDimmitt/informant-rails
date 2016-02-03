@@ -1,7 +1,7 @@
 module InformantRails
   class Railtie < ::Rails::Railtie
     initializer 'informant middleware' do |config|
-      config.middleware.use 'InformantRails::Middleware'
+      config.middleware.use InformantRails::Middleware
     end
 
     initializer 'informant ActionController binding' do
