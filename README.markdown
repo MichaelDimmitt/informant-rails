@@ -17,16 +17,16 @@ It will work automatically with Rails 3 and up as well as Mongoid 3 and up.
 
 ## Installation
 
-1) Sign up for an account on https://www.informantapp.com or provision the Heroku add-on through https://dashboard.heroku.com
-2) Add the `informant-rails` gem to your `Gemfile`
+1. Sign up for an account on https://www.informantapp.com or provision the Heroku add-on through https://dashboard.heroku.com
+2. Add the `informant-rails` gem to your `Gemfile`
 
-```
-gem 'informant-rails', group: :production
-```
+   ```
+   gem 'informant-rails', group: :production
+   ```
 
-3) Verify the INFORMANT_API_KEY is set in your app's environment (it will be set automatically if you provision through Heroku)
-4) Deploy with the gem installed
-5) Submit a form and you'll see it appear in our web interface
+3. Verify the INFORMANT_API_KEY is set in your app's environment (it will be set automatically if you provision through Heroku)
+4. Deploy with the gem installed
+5. Submit a form and you'll see it appear in our web interface
 
 ## Usage
 
