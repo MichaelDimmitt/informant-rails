@@ -3,15 +3,6 @@ rvm:
   - 2.1.2
   - 2.2.0
   - 2.3.0
-  - rbx-2
 
 gemfile:
   - gemfiles/rails_4.2.gemfile
-
-matrix:
-  include:
-    - rvm: jruby
-      gemfile: gemfiles/mongoid_4.0.gemfile
-
-services:
-  - mongodb
