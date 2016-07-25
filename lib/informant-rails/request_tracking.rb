@@ -3,7 +3,7 @@ module InformantRails
     extend ActiveSupport::Concern
 
     included do
-      before_filter do
+      before_action do
         InformantRails::Client.record_action(controller_name, action_name)
       end
     end
