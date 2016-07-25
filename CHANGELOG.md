@@ -1,3 +1,7 @@
+### 0.9.1 ###
+
+* Change before_filter to before_action (Issue #3)
+
 ### 0.9.0 ###
 
 * Support for Rails 5.0
