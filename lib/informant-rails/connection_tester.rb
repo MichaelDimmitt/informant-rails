@@ -48,7 +48,7 @@ module InformantRails
     end
 
     def assistance_message
-      "If you need assistance or have any questions, send an email to informantapp@gmail.com or tweet @informantapp and we'll help you out!"
+      "If you need assistance or have any questions, send an email to support@informantapp.com or tweet @informantapp and we'll help you out!"
     end
   end
 end

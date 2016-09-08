@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.version = InformantRails::VERSION
   s.license = "GPL"
 
-  s.authors = ["Paul Elliott", "Cameron Daigle"]
-  s.email = ["informantapp@gmail.com"]
+  s.authors = ["Informant, LLC"]
+  s.email = ["support@informantapp.com"]
   s.description = "The Informant tracks what users do wrong in your forms so you can make them better."
   s.homepage = "https://www.informantapp.com"
   s.require_paths = ["lib"]
