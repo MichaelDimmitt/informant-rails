@@ -110,37 +110,5 @@ describe InformantRails::Client do
         end
       end
     end
-
-    context 'without an api token present' do
-      before do
-        InformantRails::Config.api_token = nil
-        described_class.record({})
-        described_class.record_validated_model(model)
-      end
-
-      it 'does not transmit' do
-        expect(Thread).to_not receive(:new)
-        described_class.process
-      end
-
-      it 'clears out the request container' do
-        described_class.process
-        expect(described_class.request).to be_nil
-      end
-    end
-
-    context 'without an api token present' do
-      before { InformantRails::Config.api_token = '' }
-
-      it 'sends the data to the informant' do
-        expect(InformantRails::Client).to_not receive(:transmit)
-        described_class.process
-      end
-
-      it 'removes the request transaction from the cache' do
-        described_class.process
-        expect(described_class.request).to be_nil
-      end
-    end
   end
 end

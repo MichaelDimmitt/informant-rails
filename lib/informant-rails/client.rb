@@ -2,9 +2,7 @@ module InformantRails
   class Client
 
     def self.record(env)
-      unless Config.api_token.blank? || env['REQUEST_METHOD'] == 'GET'
-        new_request.request_url = env['HTTP_REFERER']
-      end
+      new_request.request_url = env['HTTP_REFERER'] unless env['REQUEST_METHOD'] == 'GET'
     end
 
     def self.record_action(controller_name, action)

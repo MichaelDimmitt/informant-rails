@@ -3,7 +3,7 @@ module InformantRails::Config
 
   attr_accessor :api_token, :exclude_models, :filter_parameters, :value_tracking
 
-  self.api_token = ENV['INFORMANT_API_KEY']
+  self.api_token
   self.exclude_models = []
   self.filter_parameters = []
   self.value_tracking = true
@@ -12,5 +12,9 @@ module InformantRails::Config
 
   def self.client_identifier
     @client_identifier ||= "informant-rails-#{InformantRails::VERSION}"
+  end
+
+  def self.enabled?
+    api_token.present?
   end
 end
