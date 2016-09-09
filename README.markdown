@@ -4,7 +4,7 @@
 
 The informant-rails gem provides Rails and ActiveRecord hooks for The Informant.
 
-[![Homepage](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/icons/1347/original.png)](https://addons.heroku.com/informant)
+[![Homepage](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/icons/1347/original.png)](https://www.informantapp.com)
 
 ## Compatibility
 
