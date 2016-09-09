@@ -1,3 +1,7 @@
+### 0.9.2 ###
+
+* Prevent any initialization without an API key present
+
 ### 0.9.1 ###
 
 * Change before_filter to before_action (Issue #3)
