@@ -7,7 +7,7 @@ require 'informant-rails/version'
 Gem::Specification.new do |s|
   s.name = "informant-rails"
   s.version = InformantRails::VERSION
-  s.license = "GPL"
+  s.license = "MIT"
 
   s.authors = ["Informant, LLC"]
   s.email = ["support@informantapp.com"]
