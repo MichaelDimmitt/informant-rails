@@ -1,3 +1,10 @@
+### 1.0.0 ###
+
+* Long overdue major version bump
+* Improved compatibility with older versions of rails
+* Tracking your rails version to improve our support
+* Change license to MIT
+
 ### 0.9.2 ###
 
 * Prevent any initialization without an API key present
