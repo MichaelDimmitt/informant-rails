@@ -7,3 +7,6 @@ Rails.application = TestApp
 TestApp.initialize!
 I18n.enforce_available_locales = true
 Rails.application.config.active_support.deprecation = :stderr
+
+class TestController < ActionController::Base
+end
