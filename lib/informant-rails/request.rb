@@ -18,11 +18,16 @@ module InformantRails
         request_url: request_url,
         filename: filename,
         action: action,
-        client: InformantRails::Config.client_identifier
+        client: InformantRails::Config.client_identifier,
+        rails_version: rails_version
       }
     end
 
     protected
+
+    def rails_version
+      @rails_version ||= Rails.version
+    end
 
     def untracked?(model)
       !models.detect { |container| container.model == model }
