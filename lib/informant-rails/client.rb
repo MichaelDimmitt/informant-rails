@@ -57,7 +57,7 @@ module InformantRails
     end
 
     def self.api_endpoint
-      @api_endpoint ||= URI('https://api.informantapp.com/api/v1/form_submissions')
+      @api_endpoint ||= URI("#{Config.collector_host}/api/v1/form_submissions")
     end
 
   end

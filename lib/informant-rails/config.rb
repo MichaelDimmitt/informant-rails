@@ -17,4 +17,8 @@ module InformantRails::Config
   def self.enabled?
     api_token.present?
   end
+
+  def self.collector_host
+    @collector_host ||= ENV['INFORMANT_COLLECTOR_HOST'] || 'https://api.informantapp.com'
+  end
 end
