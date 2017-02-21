@@ -54,7 +54,7 @@ describe InformantRails::Client do
 
   describe '.transmit' do
     let(:model) { User.new.tap(&:save) }
-    let(:uri) { URI("https://api.informantapp.com/api/v1/form_submissions") }
+    let(:uri) { URI("https://collector-api.informantapp.com/api/v1/form_submissions") }
     let(:net_http) { double }
     before do
       described_class.record({})
@@ -63,7 +63,7 @@ describe InformantRails::Client do
 
     it 'sends the data to the informant' do
       expect(Net::HTTP).to receive(:start).with(
-        'api.informantapp.com', uri.port, use_ssl: true
+        'collector-api.informantapp.com', uri.port, use_ssl: true
       ).and_return(net_http)
 
       described_class.transmit(described_class.request)
@@ -71,7 +71,7 @@ describe InformantRails::Client do
   end
 
   describe '.net_http_post_request' do
-    let(:uri) { URI("https://api.informantapp.com/api/v1/form_submissions") }
+    let(:uri) { URI("https://collector-api.informantapp.com/api/v1/form_submissions") }
     let(:net_http_post) { double }
 
     it 'prepares the post request' do

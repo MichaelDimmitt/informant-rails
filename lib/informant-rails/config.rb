@@ -19,6 +19,6 @@ module InformantRails::Config
   end
 
   def self.collector_host
-    @collector_host ||= ENV['INFORMANT_COLLECTOR_HOST'] || 'https://api.informantapp.com'
+    @collector_host ||= ENV['INFORMANT_COLLECTOR_HOST'] || 'https://collector-api.informantapp.com'
   end
 end
