@@ -1,3 +1,5 @@
+require 'net/http'
+
 module InformantRails
   class Client
 
