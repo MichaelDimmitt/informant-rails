@@ -1,3 +1,9 @@
+### 1.1.0 ###
+
+* Support for Mongoid 5.1
+* Update dev and test gem dependencies
+* Update URL for reporting data to Informant
+
 ### 1.0.0 ###
 
 * Long overdue major version bump
