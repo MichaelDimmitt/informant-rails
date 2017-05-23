@@ -1,3 +1,8 @@
+appraise "rails-5.1" do
+  gem 'sqlite3'
+  gem "activerecord", '~> 5.1.0', require: 'active_record/railtie'
+end
+
 appraise "rails-5.0" do
   gem 'sqlite3'
   gem 'railties', '~> 5.0.0', require: 'rails'
