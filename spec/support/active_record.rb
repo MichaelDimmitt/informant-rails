@@ -1,4 +1,4 @@
-if defined?(ActiveRecord)
+if CAPABILITIES[:active_record]
   ActiveRecord::Migration.verbose = false
 
   migration_base_class = ActiveRecord::Migration.respond_to?(:[]) ?

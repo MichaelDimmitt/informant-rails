@@ -1,4 +1,4 @@
-if defined?(Mongoid)
+if CAPABILITIES[:mongoid]
   if Mongoid.respond_to?(:load_configuration)
     Mongoid.load_configuration({
       # mongoid >= 5
