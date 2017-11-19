@@ -1,6 +1,6 @@
 require 'bundler/setup'
 
-Bundler.require(:default)
+Bundler.require
 
 ENV['INFORMANT_API_KEY'] = 'abc123'
 require 'informant-rails'
