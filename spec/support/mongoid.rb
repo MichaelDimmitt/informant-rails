@@ -33,7 +33,15 @@ if CAPABILITIES[:mongoid]
     validates_presence_of :email
     validates_length_of :name, minimum: 2
 
+    validate :base_error
+
     field :name
     field :email
+
+    attr_accessor :add_base_error
+
+    def base_error
+      errors[:base] << 'This is a base error' if add_base_error
+    end
   end
 end
