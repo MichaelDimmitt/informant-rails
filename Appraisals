@@ -39,8 +39,32 @@ appraise "rails-3.0" do
   gem "activerecord", "~> 3.0.0", require: 'active_record/railtie'
 end
 
+appraise 'mongoid-7.0' do
+  gem 'mongoid', '~> 7.0.0'
+end
+
+appraise 'mongoid-6.4' do
+  gem 'mongoid', '~> 6.4.0'
+end
+
+appraise 'mongoid-6.3' do
+  gem 'mongoid', '~> 6.3.0'
+end
+
 appraise 'mongoid-6.2' do
   gem 'mongoid', '~> 6.2.0'
+end
+
+appraise 'mongoid-6.1' do
+  gem 'mongoid', '~> 6.1.0'
+end
+
+appraise 'mongoid-6.0' do
+  gem 'mongoid', '~> 6.0.0'
+end
+
+appraise 'mongoid-5.2' do
+  gem 'mongoid', '~> 5.2.0'
 end
 
 appraise 'mongoid-5.1' do
