@@ -43,7 +43,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     rack (1.4.7)
-    rack-cache (1.7.1)
+    rack-cache (1.8.0)
       rack (>= 0.4)
     rack-ssl (1.3.4)
       rack
@@ -96,4 +96,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
